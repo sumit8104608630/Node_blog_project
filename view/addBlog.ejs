@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include("./partial/head.ejs") %>
+<title>Add-Blog</title>
+</head>
+<body>
+    <main>
+       <%- include("./partial/navbar.ejs") %> 
+      
+       
+       <form method="post" action="/blog" enctype="multipart/form-data">
+        
+        <div class="container" style="margin-top: 20px;" >
+            <div class="input-group" style="margin-bottom: 20px;">
+                <input name="coverImage" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+              </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Title</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="title" aria-describedby="emailHelp">
+        </div>
+        <div class="form-floating" style="margin-bottom: 15px;">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="content"></textarea>
+            <label for="floatingTextarea2">Comments</label>
+          </div >
+      
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+      
+    </form>
+
+
+    </main>
+    <%- include("./partial/script.js") %>
+</body>
+</html>

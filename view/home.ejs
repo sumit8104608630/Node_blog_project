@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include("./partial/head.ejs") %>
+</head>
+<body>
+    <main >
+      <%- include("./partial/navbar.ejs") %> 
+
+      <div  style="margin: 20px ; gap: 15px;   display: flex; justify-content: center;" class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+<% if (locals.blog) { %>
+ <% blog.forEach((element) => { %>
+    <div class="card"  style="width: 18rem;">
+        <img style="height: 250px;  object-fit: contain; " src="<%= element.coverImage %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= element.title %></h5>
+          <p class="card-text" style="overflow: auto; height: 50px;"><%= element.content  %></p>
+          <a href="/blog/<%=element.id%>" class="btn btn-primary">View</a>
+        </div>
+      </div>
+ <% }) %>
+<% } %>
+      </div>
+    </main>
+    <%- include("./partial/script.js") %>
+</body>
+</html>
