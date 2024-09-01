@@ -3,27 +3,36 @@
 <head>
     <%- include("./partial/head.ejs") %>
     <title>Blog</title>
+    <style>
+       @media (max-width: 522px) {
+              .img { width: 100%;}
+              pre{
+                font-size: 20px;
+              }
+             }
+            
+    </style>
 </head>
 <body>
     <main>
         <%- include("./partial/navbar.ejs") %> 
         <div class="container">
-            <div><h1 style="text-align: center;">title</h1></div>
-            <div class="image">
-             <img src="<%= blog.coverImage %>" width="500px"  alt="">
+            <div><h1 style="text-align: center;"><%= blog.title %></h1></div>
+            <div class="image" style="text-align: center;">
+             <img class="img" style="width: 50%;" src="<%= blog.coverImage %>" width="500px"  alt="">
             </div>
-            <div class="content">
-                <pre style="font-weight:700; font-size: 25px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <div class="content" style=" margin-top: 50px; width: 100%;">
+                <pre style="font-weight:700;  font-size: 25px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                     <%= blog.content %>
                 </pre>
             </div>
             <div>
-                <div style="display: flex; align-items: center; font-weight: 500; margin-bottom: 20px;"><spa style="font-size: 30px;">Created By</spa><img style="border-radius: 50%; width: 50px; object-fit: contain; height: 50px;" src="<%= blog.createdById.profileImage %>"  alt="image"></div>
+                <div style="display: flex;  align-items: center; font-weight: 500; margin-bottom: 20px;"><spa style="font-size: 30px; padding-right: 20px;">Created By <strong> <%= blog.createdById.fullName %></strong> </spa><img style="border-radius: 50%; width: 50px; object-fit: contain; height: 50px;" src="<%= blog.createdById.profileImage %>"  alt="image"></div>
                 <h2>Comments(<%= comments.length %>)</h2>
                 <% comments.forEach(element => { %>
                   <div > <div><img style="border-radius: 50%; height: 25px; width: 25px; object-fit: contain;" src="<%=element.createdBy.profileImage %> " alt="profile image">  <span><%= element.createdBy.fullName %></span></div>
                 <div class="alert alert-light" role="alert">
- <%=element.comment%> 
+                    <%=element.comment%> 
                 </div>
                 </div>
                 <% }) %>
@@ -35,11 +44,18 @@
                             <input style="margin-top: 10px;" class="btn btn-primary" type="submit" value="Submit">
                           </div >
                     </form>
-                <% } %>
+<% if (blog.createdById.email==user[0].email) { %>
+    <form method="post" action="/blog/delete/<%= blog.id %>">
+        <input style="margin-bottom: 10px; width: 100%;" class="btn btn-primary" type="submit" value="Delete">
+    </form>
+<% } %>
+              
+                                  <% } %>
    
             </div>
         </div>
     </main>
     <%- include("./partial/script.js") %>
+
 </body>
 </html>

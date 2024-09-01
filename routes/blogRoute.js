@@ -2,6 +2,8 @@ const express=require("express");
 const blogRoute=express.Router();
 const path=require("path")
 const Blog=require("../Models/blog");
+const { MongoClient, ObjectId } = require('mongodb');
+
 const multer=require("multer")
 const Comment=require("../Models/comment");
 const { ConnectionStates } = require("mongoose");
@@ -61,6 +63,12 @@ blogRoute.get("/addblog",(req,res)=>{
         createdBy:req.user[0].id
     })
     res.redirect(`/blog/${blogId}`)
+}).post("/delete/:blog_id",async(req,res)=>{
+    const blogId=req.params.blog_id;
+    console.log(blogId)
+                    await Comment.deleteMany({ blogId: new ObjectId('66d46007329b9505543cee34') })
+                    await Blog.findByIdAndDelete(blogId);
+res.redirect("/")
 })
 
 

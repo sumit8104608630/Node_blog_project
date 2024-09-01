@@ -34,7 +34,22 @@ app.get("/",async(req,res)=>{
   //  console.log(req.user)
     const blogs=await Blog.find({})
     res.render("home",{user:req.user,blog:blogs});
-}) 
+})
+app.delete("/blog/delete/:id",async(req,res)=>{
+ const id=req.params.id;
+ try{
+    const blog=await Blog.findByIdAndDelete(id)
+    if(!blog){
+        res.redirect("/")
+
+    }
+ }
+ catch(err){
+    console.log(err)
+    res.status(500).send(err.message);
+
+ }
+})
 
 
 
@@ -42,4 +57,5 @@ app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 })
 
- 
+ // delete function
+console.log("sumit")
