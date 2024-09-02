@@ -23,7 +23,7 @@ const {fullName,email,password}=req.body;
 try{
 await User.create({
    fullName,
-   email,
+   email, 
    password,
 })
 res.redirect("/")

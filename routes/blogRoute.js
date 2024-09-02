@@ -60,7 +60,7 @@ blogRoute.get("/addblog",(req,res)=>{
     const comments=await Comment.create({
         comment,
         blogId:blogId,
-        createdBy:req.user[0].id
+        createdBy:req.user[0].id 
     })
     res.redirect(`/blog/${blogId}`)
 }).post("/delete/:blog_id",async(req,res)=>{
